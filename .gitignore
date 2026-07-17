@@ -1,0 +1,20 @@
+# Client
+client/node_modules
+client/dist
+client/.env
+client/.env.*
+
+# Server (future)
+server/node_modules
+server/dist
+server/.env
+server/.env.*
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
