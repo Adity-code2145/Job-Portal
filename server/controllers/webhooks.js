@@ -3,6 +3,7 @@ import User from "../models/User.js";
 
 //API Controller function to Manage Clerk User with database
 export const clerkWebhooks = async (req, res) => {
+    console.log("Webhook received");
   try {
     // Create a Svix instance with clerk webhook secret.
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
@@ -13,6 +14,7 @@ export const clerkWebhooks = async (req, res) => {
       "svix-timestamp": req.headers["svix-timestamp"],
       "svix-signature": req.headers["svix-signature"],
     });
+    // console.log(type);
 
     // Getting data from request body
     const { data, type } = req.body;
@@ -29,7 +31,7 @@ export const clerkWebhooks = async (req, res) => {
             resume: ''
         }
         await User.create(userData)
-        res.josn({})
+        res.json({})
         break;
 
       }
@@ -48,7 +50,7 @@ export const clerkWebhooks = async (req, res) => {
 
       case "user.deleted": {
         await User.findByIdAndDelete(data.id)
-        res.sendjson({})
+        res.json({})
         break;
       }
       default:
